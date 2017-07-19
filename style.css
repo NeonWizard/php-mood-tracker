@@ -12,7 +12,6 @@ body {
 
 #mood-grid {
 	display: flex;
-	justify-content: space-between;
 
 	position: absolute;
 	top: 50%;
@@ -29,11 +28,31 @@ body {
 	flex-direction: column;
 }
 
-.mood-box {
-	width: 35px;
-	height: 35px;
+.mood-container {
+	width: 40px;
+	height: 40px;
 
 	margin: 2px;
+}
+
+.mood-box {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	width: 100%;
+	height: 100%;
 
 	background-color: rgb(200, 200, 200);
+
+	transition: 0.25s width, 0.25s height;
+}
+.mood-box:hover {
+	width: 135%;
+	height: 135%;
+
+	border: 1px solid darkgray;
+
+	z-index: 1;
 }
