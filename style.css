@@ -20,23 +20,35 @@ body {
 
 	background-color: white;
 	border: 1px solid gray;
-	padding: 30px;
+	padding: 50px;
+}
+
+.month-header {
+	position: absolute;
+	left: 50%;
+	top: -33px;
+	transform: translateX(-45%);
+
+	font-size: 1.5em;
 }
 
 .mood-grid-col {
 	display: flex;
 	flex-direction: column;
+
+	position: relative;
 }
 
 .mood-container {
-	width: 40px;
-	height: 40px;
+	position: relative;
+	width: 35px;
+	height: 35px;
 
-	margin: 2px;
+	margin: 3px;
 }
 
 .mood-box {
-	position: relative;
+	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
