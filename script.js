@@ -8,7 +8,7 @@ function createGrid() {
 	let doy = today.getDOY();
 	let startDate = new Date();
 	startDate.setDate(today.getDate() - 182);
-	startDate.setDate(startDate.getDate() - (6-startDate.getDay())); // set startDate to a monday
+	startDate.setDate(startDate.getDate() - (startDate.getDay())); // set startDate to a sunday
 	
 	let daysToDisplay = Date.daysBetween(startDate, today)
 
