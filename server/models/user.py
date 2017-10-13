@@ -14,5 +14,15 @@ class User:
 		else:
 			None
 
+	def getByUsername(self, username):
+		rows = self.select([
+			"username LIKE '{}'".format(username)
+		])
+
+		if rows:
+			return rows[0]
+		else:
+			None
+
 	def select(self, search=[], options=[], keys=['*'], joins=[]):
 		return self.userTable.select(search, options, keys, joins)
