@@ -3,6 +3,8 @@ import json
 from urllib.parse import parse_qs
 import http.cookies as cookies
 
+# from models.user import User
+
 class Handler(BaseHTTPRequestHandler):
 	# Add CORS support
 	def end_headers(self):
@@ -113,4 +115,5 @@ def main():
 	server.serve_forever()
 
 if __name__ == "__main__":
-	main()
+	# main()
+	pass
