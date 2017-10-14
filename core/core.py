@@ -10,7 +10,7 @@ class Core:
 			for fileName in fileNames:
 				exec(open(root+"\\"+fileName).read())
 				modelName = fileName.rstrip(".py")
-				self._MODELS[modelName.upper()] = locals()[modelName[0].upper() + modelName[1:] + "Model"]
+				self._MODELS[modelName.upper()] = locals()[modelName[0].upper() + modelName[1:] + "Model"]()
 
 
 	def MODELS(self):

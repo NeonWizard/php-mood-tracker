@@ -103,9 +103,10 @@ class Handler(BaseHTTPRequestHandler):
 		while i >= 0:
 			classFileName = "controllers\\" + "\\".join(params[:i+1]) + ".py"
 			if os.path.isfile(classFileName):
-				className = (classFileName[12:].rstrip(".py").replace("\\", "_") + "_controller").upper()
+				className = classFileName[12:].rstrip(".py").replace("\\", "_")
+				className = className[0].upper() + className[1:] + "Controller"
 
-				controller = locals()[className]
+				controller = locals()[className]()
 				status_code, html = controller.run(self.path[i:].strip("/").split("/"))
 
 				if status_code >= 200 and status_code <= 299:

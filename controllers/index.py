@@ -1,6 +1,6 @@
-class Index(Controller):
+class IndexController(Controller):
 	def __init__(self):
-		self.userModel = Core.MODEL('USER')()
+		self.userModel = Core.MODEL('USER')
 
 		Controller.__init__(self)
 
@@ -12,6 +12,3 @@ class Index(Controller):
 		self.viewArg("users", self.userModel.select())
 
 		self.template = "helloworld.html"
-
-
-INDEX_CONTROLLER = Index()
