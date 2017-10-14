@@ -2,7 +2,8 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 from urllib.parse import parse_qs
 import http.cookies as cookies
-import os
+import os, sys
+sys.dont_write_bytecode = True
 
 
 # 	------------ AVAILABLE DATATYPES --------------
