@@ -23,7 +23,12 @@ class Controller:
 			self.error('An error has occurred, please contact an administrator.')
 			self.error(str(e))
 
+		self.assignDefaultArgs()
+
 		return self.render() # returns (status_code, html)
+
+	def assignDefaultArgs(self):
+		self.viewArg("MODELS", MODELS)
 
 	def render(self):
 		if self.errors:

@@ -5,8 +5,16 @@ import http.cookies as cookies
 import os
 
 from core.controller import Controller
+from core.table import Table
 
-# from models.user import User as UserModel
+# --- Import models ---
+MODELS = {}
+for root, dirs, fileNames in os.walk("models"):
+	for fileName in fileNames:
+		exec(open(root+"\\"+fileName).read())
+		MODELS[fileName.rstrip(".py")] = False
+
+
 # UserModel().insert({
 # 	'firstName': 'Simon',
 # 	"lastName": "Oliver",

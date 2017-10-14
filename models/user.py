@@ -1,8 +1,5 @@
-from core.table import Table
-
-class User(Table):
+class UserModel(Table):
 	def __init__(self):
-		self.userTable = Table('User')
 		self.tableName = "User"
 
 	def getById(self, id):
