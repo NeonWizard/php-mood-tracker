@@ -9,8 +9,8 @@
 	% endif
 % endfor
 
-<%
-UserModel().select() 
+% for user in users:
+ 	<p>${user['firstName']}</p>
+% endfor
 
-%>
 </ul>

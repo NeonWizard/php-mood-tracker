@@ -4,15 +4,18 @@ from urllib.parse import parse_qs
 import http.cookies as cookies
 import os
 
-from core.controller import Controller
-from core.table import Table
 
-# --- Import models ---
-MODELS = {}
-for root, dirs, fileNames in os.walk("models"):
-	for fileName in fileNames:
-		exec(open(root+"\\"+fileName).read())
-		MODELS[fileName.rstrip(".py")] = False
+# 	------------ AVAILABLE DATATYPES --------------
+#	Core 			--- Center of the application
+#	DB				--- Provides access to SqLite3 database
+#	Table 			--- Abstract layer on top of database table
+#	Controller 		--- Controls endpoint(s)
+
+
+
+from core.core 			import Core
+from core.table 		import Table
+from core.controller 	import Controller
 
 
 # UserModel().insert({
