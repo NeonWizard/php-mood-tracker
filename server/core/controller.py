@@ -8,6 +8,9 @@ class Controller:
 
 		self.errors = []
 
+		self.header = "html-header.html"
+		self.footer = "html-footer.html"
+
 	def run(self, params):
 		action = params[1] if len(params) > 1 else 'index'
 
@@ -29,11 +32,9 @@ class Controller:
 		if not self.template:
 			self.template = (self.__class__.__name__).lower() + ".html"
 
-		html = ""
-		# TODO
-		# html += self.view.render(self.header)
+		html = self.view.render(self.header)
 		html += self.view.render(self.template)
-		# html += self.view.render(self.footer)
+		html += self.view.render(self.footer)
 
 		return (200, html)
 

@@ -6,4 +6,4 @@ This application allows you to track your daily mood conveniently, and displays 
  - [ ] Make new core instances on every request :(
  - [ ] Add insert, update, and delete to table core
  - [ ] Add inline python to views
- - [ ] Add header and footer to controller.render()
+ - [x] Add header and footer to controller.render()
