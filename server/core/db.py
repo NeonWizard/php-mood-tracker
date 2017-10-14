@@ -15,10 +15,11 @@ class DB:
 		self.curs = self.conn.cursor()
 
 	def buildQuery(self, search=[], options=[]):
-		sql = ""
 		if search:
 			sql = "WHERE "
 			sql += " AND ".join(search)
+		else:
+			sql = ""
 
 		if options:
 			sql += " ".join(options)

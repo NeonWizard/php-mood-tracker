@@ -23,6 +23,3 @@ class User:
 			return rows[0]
 		else:
 			None
-
-	def select(self, search=[], options=[], keys=['*'], joins=[]):
-		return self.userTable.select(search, options, keys, joins)

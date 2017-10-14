@@ -2,8 +2,15 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 from urllib.parse import parse_qs
 import http.cookies as cookies
+import os
 
-# from models.user import User
+# from models.user import User as UserModel
+from core.controller import Controller
+
+# --- LOAD ALL CONTROLLERS ---
+for root, dirs, fileNames in os.walk("controllers"):
+	for fileName in fileNames:
+		exec(open(root+"\\"+fileName).read())
 
 class Handler(BaseHTTPRequestHandler):
 	# Add CORS support
@@ -89,12 +96,34 @@ class Handler(BaseHTTPRequestHandler):
 	def do_GET(self):
 		self.loadCookie()	# Always load the cookie regardless of whether it's used or not
 
-		if self.checkPath("/helloworld"):
-			self.send_response(200)
-			self.end_headers()
-			print("GET request received.")
-		else:
-			self.handle404()
+		if self.path == "/":
+			self.path = "/index"
+
+		params = self.path.strip("/").split("/")
+		i = len(params) - 1
+		while i >= 0:
+			classFileName = "controllers\\" + "\\".join(params[:i+1]) + ".py"
+			if os.path.isfile(classFileName):
+				className = (classFileName.strip("controllers\\").strip(".py").replace("\\", "_") + "_controller").upper()
+
+				controller = globals()[className]
+				status_code, html = controller.run(self.path[i:].strip("/").split("/"))
+
+				if status_code >= 200 and status_code <= 299:
+					self.send_response(200)
+					self.send_header("Content-Type", "text/html")
+					self.end_headers()
+					self.wfile.write(html.encode("utf-8"))
+				else:
+					self.sendError(status_code, html)
+
+				return
+
+			i -= 1
+
+
+		self.handle404()
+
 
 	def do_POST(self):
 		self.loadCookie()
@@ -115,5 +144,4 @@ def main():
 	server.serve_forever()
 
 if __name__ == "__main__":
-	# main()
-	pass
+	main()
