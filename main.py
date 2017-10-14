@@ -4,15 +4,18 @@ from urllib.parse import parse_qs
 import http.cookies as cookies
 import os
 
-from core.controller import Controller
-from core.table import Table
 
-# --- Import models ---
-MODELS = {}
-for root, dirs, fileNames in os.walk("models"):
-	for fileName in fileNames:
-		exec(open(root+"\\"+fileName).read())
-		MODELS[fileName.rstrip(".py")] = False
+# 	------------ AVAILABLE DATATYPES --------------
+#	Core 			--- Center of the application
+#	DB				--- Provides access to SqLite3 database
+#	Table 			--- Abstract layer on top of database table
+#	Controller 		--- Controls endpoint(s)
+
+
+
+from core.core 			import Core
+from core.table 		import Table
+from core.controller 	import Controller
 
 
 # UserModel().insert({
@@ -100,9 +103,10 @@ class Handler(BaseHTTPRequestHandler):
 		while i >= 0:
 			classFileName = "controllers\\" + "\\".join(params[:i+1]) + ".py"
 			if os.path.isfile(classFileName):
-				className = (classFileName[12:].rstrip(".py").replace("\\", "_") + "_controller").upper()
+				className = classFileName[12:].rstrip(".py").replace("\\", "_")
+				className = className[0].upper() + className[1:] + "Controller"
 
-				controller = locals()[className]
+				controller = locals()[className]()
 				status_code, html = controller.run(self.path[i:].strip("/").split("/"))
 
 				if status_code >= 200 and status_code <= 299:

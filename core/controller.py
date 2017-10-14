@@ -1,8 +1,8 @@
+from core.core import Core
 from core.view import View
 
 class Controller:
 	def __init__(self):
-		self.args = []
 		self.template = ""
 		self.view = View()
 
@@ -28,7 +28,7 @@ class Controller:
 		return self.render() # returns (status_code, html)
 
 	def assignDefaultArgs(self):
-		self.viewArg("MODELS", MODELS)
+		pass
 
 	def render(self):
 		if self.errors:
