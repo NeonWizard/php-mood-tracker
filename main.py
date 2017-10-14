@@ -5,6 +5,7 @@ import http.cookies as cookies
 import os
 
 from core.controller import Controller
+from core.table import Table
 
 # --- Import models ---
 MODELS = {}
