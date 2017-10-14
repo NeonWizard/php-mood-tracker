@@ -11,8 +11,8 @@ class Controller:
 		self.header = "html-header.html"
 		self.footer = "html-footer.html"
 
-	def run(self, params):
-		action = params[1] if len(params) > 1 else 'index'
+	def run(self):
+		action = Core.PARAMS()[1] if len(Core.PARAMS()) > 1 else 'index'
 
 		if not getattr(self, action, None):
 			return self._404()
@@ -29,6 +29,7 @@ class Controller:
 
 	def assignDefaultArgs(self):
 		self.viewArg("PATH", Core.PATH())
+		self.viewArg("PARAMS", Core.PARAMS())
 
 	def render(self):
 		if self.errors:

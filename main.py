@@ -92,7 +92,6 @@ class Handler(BaseHTTPRequestHandler):
 			self.path = "/index"
 
 		params = self.path.strip("/").split("/")
-		Core.PARAMSSET(params)
 		Core.PATHSET(self.path)
 
 		i = len(params) - 1
@@ -102,8 +101,10 @@ class Handler(BaseHTTPRequestHandler):
 				className = classFileName[12:].rstrip(".py").replace("\\", "_")
 				className = className[0].upper() + className[1:] + "Controller"
 
+				Core.PARAMSSET(params[i:])
+
 				controller = locals()[className]()
-				status_code, html = controller.run(self.path[i:].strip("/").split("/"))
+				status_code, html = controller.run()
 
 				if status_code >= 200 and status_code <= 299:
 					self.send_response(200)
