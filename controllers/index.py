@@ -3,10 +3,10 @@ class Index(Controller):
 		Controller.__init__(self)
 
 	def index(self):
-		self.template = "login.html"
+		self.template = "index.html"
 
 	def hello_world(self):
-		self.template = "index.html"
+		self.template = "helloworld.html"
 
 
 INDEX_CONTROLLER = Index()
