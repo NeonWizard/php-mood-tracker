@@ -4,6 +4,6 @@ This application allows you to track your daily mood conveniently, and displays 
 ## To-do
  - [ ] Simplify path parsing to disallow directories inside controllers/
  - [x] Make new controller instances on every request :(
- - [ ] Add insert, update, and delete to table core
+ - [x] Add insert, update, and delete to table core
  - [ ] Add inline python to views
  - [x] Add header and footer to controller.render()

@@ -4,8 +4,15 @@ from urllib.parse import parse_qs
 import http.cookies as cookies
 import os
 
-# from models.user import User as UserModel
 from core.controller import Controller
+
+# from models.user import User as UserModel
+# UserModel().insert({
+# 	'firstName': 'Simon',
+# 	"lastName": "Oliver",
+# 	"username": "olimon",
+# 	"password": "bestsonev3r"
+# })
 
 class Handler(BaseHTTPRequestHandler):
 	# Add CORS support

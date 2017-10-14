@@ -1,8 +1,9 @@
 from core.table import Table
 
-class User:
+class User(Table):
 	def __init__(self):
 		self.userTable = Table('User')
+		self.tableName = "User"
 
 	def getById(self, id):
 		rows = self.select([

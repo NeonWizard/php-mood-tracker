@@ -26,8 +26,9 @@ class DB:
 
 		return sql
 
-	def query(self, sql):
-		self.curs.execute(sql)
+	def query(self, sql, vars=[]):
+		self.curs.execute(sql, vars)
+		self.conn.commit()
 		return self.curs.fetchall()
 
 
