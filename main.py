@@ -12,10 +12,14 @@ sys.dont_write_bytecode = True
 #	Table 			--- Abstract layer on top of database table
 #	Controller 		--- Controls endpoint(s)
 
+#	config			--- Server-wide configuration details
+
 
 from core.core 			import Core
 from core.table 		import Table
 from core.controller 	import Controller
+
+from config 			import config
 
 
 class Handler(BaseHTTPRequestHandler):

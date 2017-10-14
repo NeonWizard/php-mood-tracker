@@ -1,6 +1,7 @@
 import os
 
 from core.table import Table
+from config import config
 
 class Core:
 	def __init__(self):
@@ -31,6 +32,9 @@ class Core:
 		self._params = params
 	def PARAMS(self):
 		return self._params
+
+	def CONFIG(self):
+		return config
 
 
 Core = Core() # I'll keep abusing python until it gives me singletons :^)

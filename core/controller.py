@@ -30,6 +30,7 @@ class Controller:
 	def assignDefaultArgs(self):
 		self.viewArg("PATH", Core.PATH())
 		self.viewArg("PARAMS", Core.PARAMS())
+		self.viewArg("CONFIG", Core.CONFIG())
 
 	def render(self):
 		if self.errors:
