@@ -92,6 +92,9 @@ class Handler(BaseHTTPRequestHandler):
 			self.path = "/index"
 
 		params = self.path.strip("/").split("/")
+		Core.PARAMSSET(params)
+		Core.PATHSET(self.path)
+
 		i = len(params) - 1
 		while i >= 0:
 			classFileName = "controllers\\" + "\\".join(params[:i+1]) + ".py"

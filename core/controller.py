@@ -28,7 +28,7 @@ class Controller:
 		return self.render() # returns (status_code, html)
 
 	def assignDefaultArgs(self):
-		pass
+		self.viewArg("PATH", Core.PATH())
 
 	def render(self):
 		if self.errors:
