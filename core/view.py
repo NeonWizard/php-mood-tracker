@@ -1,9 +1,12 @@
+from mako.template import Template
+
 class View():
 	def __init__(self):
-		self.args = []
+		self.args = {}
 
 	def assign(self, key, val):
 		self.args[key] = val
 
-	def render(self, fileName, vars=[]):
-		return open("views/"+fileName).read()
+	def render(self, filename, vars=[]):
+		t = Template(filename=("views/"+filename))
+		return str(t.render(**self.args))

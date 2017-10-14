@@ -6,6 +6,8 @@ class Index(Controller):
 		self.template = "index.html"
 
 	def hello_world(self):
+		self.viewArg("var", "this is a test variable")
+
 		self.template = "helloworld.html"
 
 
