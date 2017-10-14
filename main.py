@@ -92,7 +92,7 @@ class Handler(BaseHTTPRequestHandler):
 		while i >= 0:
 			classFileName = "controllers\\" + "\\".join(params[:i+1]) + ".py"
 			if os.path.isfile(classFileName):
-				className = (classFileName.strip("controllers\\").strip(".py").replace("\\", "_") + "_controller").upper()
+				className = (classFileName[12:].rstrip(".py").replace("\\", "_") + "_controller").upper()
 
 				controller = locals()[className]
 				status_code, html = controller.run(self.path[i:].strip("/").split("/"))
