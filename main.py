@@ -7,11 +7,6 @@ import os
 # from models.user import User as UserModel
 from core.controller import Controller
 
-# --- LOAD ALL CONTROLLERS ---
-for root, dirs, fileNames in os.walk("controllers"):
-	for fileName in fileNames:
-		exec(open(root+"\\"+fileName).read())
-
 class Handler(BaseHTTPRequestHandler):
 	# Add CORS support
 	def end_headers(self):
@@ -64,25 +59,6 @@ class Handler(BaseHTTPRequestHandler):
 		for morsel in self.cookie.values():
 			self.send_header("Set-Cookie", morsel.OutputString())
 
-	def checkPath(self, mask):
-		mask_parts = mask[1:].split("/")
-		path_parts = self.path[1:].rstrip("/").split("/")
-		if len(mask_parts) != len(path_parts):
-			self.url_vars = {}
-			return False
-
-		vars = {}
-		for i in range(len(mask_parts)):
-			if mask_parts[i][0] == "{":
-				vars[mask_parts[i][1:-1]] = path_parts[i]
-			else:
-				if mask_parts[i] != path_parts[i]:
-					self.url_vars = {}
-					return False
-
-		self.url_vars = vars
-		return True
-
 	def sendError(self, status_code, error):
 		self.send_response(status_code)
 		self.send_header("Content-Type", "text/plain")
@@ -94,6 +70,11 @@ class Handler(BaseHTTPRequestHandler):
 		self.end_headers()
 
 	def do_GET(self):
+		# --- LOAD ALL CONTROLLERS ---
+		for root, dirs, fileNames in os.walk("controllers"):
+			for fileName in fileNames:
+				exec(open(root+"\\"+fileName).read())
+
 		self.loadCookie()	# Always load the cookie regardless of whether it's used or not
 
 		if self.path == "/":
@@ -106,7 +87,7 @@ class Handler(BaseHTTPRequestHandler):
 			if os.path.isfile(classFileName):
 				className = (classFileName.strip("controllers\\").strip(".py").replace("\\", "_") + "_controller").upper()
 
-				controller = globals()[className]
+				controller = locals()[className]
 				status_code, html = controller.run(self.path[i:].strip("/").split("/"))
 
 				if status_code >= 200 and status_code <= 299:
