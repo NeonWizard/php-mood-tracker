@@ -12,18 +12,10 @@ import os
 #	Controller 		--- Controls endpoint(s)
 
 
-
 from core.core 			import Core
 from core.table 		import Table
 from core.controller 	import Controller
 
-
-# UserModel().insert({
-# 	'firstName': 'Simon',
-# 	"lastName": "Oliver",
-# 	"username": "olimon",
-# 	"password": "bestsonev3r"
-# })
 
 class Handler(BaseHTTPRequestHandler):
 	# Add CORS support
