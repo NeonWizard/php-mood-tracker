@@ -1,4 +1,5 @@
 import sqlite3
+from config import config
 
 
 def dict_factory(cursor, row):
@@ -8,8 +9,8 @@ def dict_factory(cursor, row):
 	return d
 
 class DB:
-	def __init__(self, dbFileName):
-		self.conn = sqlite3.connect(dbFileName+".db")
+	def __init__(self):
+		self.conn = sqlite3.connect(config.DBName+".db")
 		self.conn.row_factory = dict_factory
 
 		self.curs = self.conn.cursor()
@@ -32,4 +33,4 @@ class DB:
 		return self.curs.fetchall()
 
 
-DB = DB('mood-tracker')
+DB = DB()
