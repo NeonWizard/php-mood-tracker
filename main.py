@@ -116,6 +116,7 @@ class Handler(BaseHTTPRequestHandler):
 			self.wfile.write(content.encode("utf-8"))
 			return
 
+		Core.__init__() # reset core
 		Core.PATHSET(self.path)
 
 		# --- LOAD ALL CONTROLLERS ---
