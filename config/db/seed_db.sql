@@ -1,0 +1,12 @@
+BEGIN TRANSACTION;
+INSERT INTO `UserMood` VALUES (1,'10/14/2017',1,3);
+INSERT INTO `UserMood` VALUES (2,'10/13/2017',1,1);
+INSERT INTO `UserMood` VALUES (3,'10/13/2017',2,1);
+INSERT INTO `User` VALUES (1,'Wes','Miravete','averagewizard13','password123',NULL);
+INSERT INTO `User` VALUES (2,'Maryn','Weed','mweed','password123',NULL);
+INSERT INTO `User` VALUES (6,'Simon','Oliver','olimon','bestsonev3r',NULL);
+INSERT INTO `User` VALUES (7,'Captain','Miravete','captain','d0gg0',NULL);
+INSERT INTO `Mood` VALUES (1,'Happy','#A9EF12',NULL);
+INSERT INTO `Mood` VALUES (2,'Sad','#4E12EF',NULL);
+INSERT INTO `Mood` VALUES (3,'Neutral','#A2EDDF',NULL);
+COMMIT;
