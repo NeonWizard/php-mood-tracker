@@ -8,4 +8,4 @@ This application allows you to track your daily mood conveniently, and displays 
  - [x] Add header and footer to controller.render()
  - [x] Serve css/js
  - [x] Add database drop->create tables and seed helper scripts
- - [ ] Instead of exec()ing every controller file, only exec the one that is needed
+ - [x] Instead of exec()ing every controller file, only exec the one that is needed

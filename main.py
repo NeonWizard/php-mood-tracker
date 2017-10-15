@@ -119,17 +119,13 @@ class Handler(BaseHTTPRequestHandler):
 		Core.__init__() # reset core
 		Core.PATHSET(self.path)
 
-		# --- LOAD ALL CONTROLLERS ---
-		for root, dirs, fileNames in os.walk("controllers"):
-			for fileName in fileNames:
-				exec(open(root+"\\"+fileName).read())
-
 
 		i = len(params) - 1
 		while i >= 0:
 			classFileName = "controllers\\" + "\\".join(params[:i+1]) + ".py"
 			if os.path.isfile(classFileName):
 				className = classFileName[12:].rstrip(".py").replace("\\", "_")
+				exec(open("controllers/"+className+".py").read())
 				className = className[0].upper() + className[1:] + "Controller"
 
 				Core.PARAMSSET(params[i:])
