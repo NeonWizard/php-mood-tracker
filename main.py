@@ -85,11 +85,6 @@ class Handler(BaseHTTPRequestHandler):
 		self.end_headers()
 
 	def do_GET(self):
-		# --- LOAD ALL CONTROLLERS ---
-		for root, dirs, fileNames in os.walk("controllers"):
-			for fileName in fileNames:
-				exec(open(root+"\\"+fileName).read())
-
 		self.loadCookie()	# Always load the cookie regardless of whether it's used or not
 
 		if self.path == "/":
@@ -97,6 +92,36 @@ class Handler(BaseHTTPRequestHandler):
 
 		params = self.path.strip("/").split("/")
 		Core.PATHSET(self.path)
+
+		if params[0] == "public":
+			# Fetching css/js
+			if params[1] == "css":
+				mimetype = "text/css"
+			elif params[1] == "js":
+				mimetype = "text/javascript"
+			else:
+				self.send_response(404)
+				self.end_headers()
+				return
+
+			self.send_response(200)
+			self.send_header("Content-type", mimetype)
+			self.end_headers()
+			try:
+				content = open(self.path.lstrip("/")).read()
+			except:
+				self.send_response(404)
+				self.end_headers()
+				return
+
+			self.wfile.write(content.encode("utf-8"))
+			return
+
+		# --- LOAD ALL CONTROLLERS ---
+		for root, dirs, fileNames in os.walk("controllers"):
+			for fileName in fileNames:
+				exec(open(root+"\\"+fileName).read())
+
 
 		i = len(params) - 1
 		while i >= 0:
