@@ -9,4 +9,4 @@ This application allows you to track your daily mood conveniently, and displays 
  - [x] Add header and footer to controller.render()
  - [ ] Add 'row' styling to main.css
  - [ ] Serve css/js
- 
+ - [ ] Add database drop->create tables and seed helper scripts
