@@ -91,7 +91,6 @@ class Handler(BaseHTTPRequestHandler):
 			self.path = "/index"
 
 		params = self.path.strip("/").split("/")
-		Core.PATHSET(self.path)
 
 		if params[0] == "public":
 			# Fetching css/js
@@ -116,6 +115,8 @@ class Handler(BaseHTTPRequestHandler):
 
 			self.wfile.write(content.encode("utf-8"))
 			return
+
+		Core.PATHSET(self.path)
 
 		# --- LOAD ALL CONTROLLERS ---
 		for root, dirs, fileNames in os.walk("controllers"):

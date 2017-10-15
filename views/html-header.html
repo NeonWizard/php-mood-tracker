@@ -14,3 +14,11 @@
 <header>
 	<h1 class="title">${CONFIG.siteTitle}</h1>
 </header>
+
+% if errors:
+	<div id="errors">
+	% for error in errors:
+		<b>${error}</b>
+	% endfor
+	</div>
+% endif
