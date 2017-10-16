@@ -1,8 +1,11 @@
-<div style="display: flex">
-	<label>Username: </label>
-	<input type="text"></input>
-</div>
-<div style="display: flex">
-	<label>Password: </label>
-	<input type="text"></input>
-</div>
+<form action="/login" method="post" enctype="application/json">
+	<div style="display: flex">
+		<label>Username: </label>
+		<input name="username" type="text"></input>
+	</div>
+	<div style="display: flex">
+		<label>Password: </label>
+		<input name="password" type="text"></input>
+	</div>
+	<input type="submit">
+</form>

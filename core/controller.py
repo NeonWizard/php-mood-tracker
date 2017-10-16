@@ -31,6 +31,7 @@ class Controller:
 		self.viewArg("PATH", Core.PATH())
 		self.viewArg("PARAMS", Core.PARAMS())
 		self.viewArg("CONFIG", Core.CONFIG())
+		self.viewArg("USER", Core.USER())
 
 	def render(self):
 		self.viewArg('errors', self.errors)

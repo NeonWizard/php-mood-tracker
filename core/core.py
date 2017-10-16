@@ -7,6 +7,12 @@ class Core:
 	def __init__(self):
 		self._path = ""
 		self._params = []
+		self._session = {}
+		self._headers = {}
+		self._cookies = {}
+
+		self._responseCode = 200
+		self._persistResponse = False
 
 		# --- Import models ---
 		self._MODELS = {}
@@ -17,11 +23,33 @@ class Core:
 				self._MODELS[modelName.upper()] = locals()[modelName[0].upper() + modelName[1:] + "Model"]()
 
 
+	def redirect(self, path):
+		self.HEADERSET("Location", path)
+		self.RCODESET(303, True)
+
+
 	def MODELS(self):
 		return self._MODELS
 
 	def MODEL(self, name):
 		return self._MODELS[name]
+
+	def HEADERSET(self, key, val, responseCode=None):
+		key = key.upper()
+		if responseCode:
+			self._responseCode = responseCode
+		self._headers[key] = val
+	def HEADERS(self, key=None):
+		if not key:
+			return self._headers.items()
+		return self._headers[key]
+
+	def RCODESET(self, responseCode, force=False):
+		if not self._persistResponse:
+			self._responseCode = responseCode
+			self._persistResponse = force
+	def RCODE(self):
+		return self._responseCode
 
 	def PATHSET(self, path):
 		self._path = path
@@ -35,6 +63,34 @@ class Core:
 
 	def CONFIG(self):
 		return config
+
+	def COOKIESET(self, key, val):
+		self._cookies[key] = val
+	def COOKIES(self, key=None):
+		if not key:
+			return self._cookies.items()
+
+		if key in self._cookies:
+			return self._cookies[key]
+		return None
+
+	def SESSET(self, key, val):
+		self._session[key] = val
+	def SES(self, key=None):
+		if not key:
+			return self._session
+
+		if key not in self._session: return None
+		return self._session[key]
+
+	def USERSET(self, key, val):
+		self._session['USER'][key] = val
+	def USER(self, key=None):
+		if 'USER' not in self._session: return None
+
+		if not key:
+			return self._session['USER']
+		return self._session['USER'][key]
 
 
 Core = Core() # I'll keep abusing python until it gives me singletons :^)
