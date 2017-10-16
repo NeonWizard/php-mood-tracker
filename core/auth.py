@@ -1,5 +1,6 @@
-import random
+import base64, bcrypt
 import datetime
+import os
 
 from core.core import Core
 from core.table import Table
@@ -20,7 +21,7 @@ class Auth:
 			return
 
 		userdata = Core.MODELS('USER').getByUsername(username)
-		if userdata and password == userdata['password']:
+		if userdata and bcrypt.checkpw(password.encode("utf-8"), userdata['password'].encode("utf-8")):
 			self.authSuccess(userdata, True)
 			return True
 		else:
@@ -40,7 +41,7 @@ class Auth:
 
 	# Create a random token to identify a user after login
 	def createToken(self):
-		return str(random.randrange(1000000))
+		return base64.b64encode(os.urandom(32)).decode("utf-8")
 
 	def logout(self):
 		pass

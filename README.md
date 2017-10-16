@@ -15,3 +15,4 @@ This application allows you to track your daily mood conveniently, and displays 
  - [ ] Allow sending in a dictionary to Table.select for query vars (instead of string formatting before function call)
  - [ ] Load cookies into Core instead of reading from self.cookie
  - [ ] Add nav dropdown (with logout) to right side of header
+ - [ ] Add better support for POST AJAX
