@@ -19,7 +19,7 @@ class Auth:
 			Core.redirect("/")
 			return
 
-		userdata = Core.MODEL('USER').getByUsername(username)
+		userdata = Core.MODELS('USER').getByUsername(username)
 		if userdata and password == userdata['password']:
 			self.authSuccess(userdata, True)
 			return True
@@ -68,7 +68,7 @@ class Auth:
 			userSessionTable.delete(sessiondata['id'])
 			return False
 
-		userdata = Core.MODEL('USER').getById(sessiondata['userId'])
+		userdata = Core.MODELS('USER').getById(sessiondata['userId'])
 		self.authSuccess(userdata)
 
 		return True

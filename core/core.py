@@ -28,11 +28,10 @@ class Core:
 		self.RCODESET(303, True)
 
 
-	def MODELS(self):
+	def MODELS(self, name=None):
+		if name:
+			return self._MODELS[name]
 		return self._MODELS
-
-	def MODEL(self, name):
-		return self._MODELS[name]
 
 	def HEADERSET(self, key, val, responseCode=None):
 		key = key.upper()

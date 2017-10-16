@@ -1,6 +1,6 @@
 class IndexController(Controller):
 	def __init__(self):
-		self.userModel = Core.MODEL('USER')
+		self.userModel = Core.MODELS('USER')
 
 		Controller.__init__(self)
 
