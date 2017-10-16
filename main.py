@@ -74,11 +74,6 @@ class Handler(BaseHTTPRequestHandler):
 		else:
 			self.cookie = cookies.SimpleCookie()
 
-	def sendCookie(self):
-		if not hasattr(self, "cookie"): return
-
-		for morsel in self.cookie.values():
-			Core.HEADERSET("Set-Cookie", morsel.OutputString())
 
 	def sendError(self, status_code, error):
 		self.send_response(status_code, error)
@@ -97,12 +92,11 @@ class Handler(BaseHTTPRequestHandler):
 		Core.HEADERSET("Access-Control-Allow-Credentials", "true")
 
 		for cookie, val in Core.COOKIES():
+			self.cookie[cookie] = val # abuse this to get morsel string
+			self.send_header("Set-Cookie", self.cookie[cookie].OutputString())
 			debugContent += "\tCookie: " + "\n"
 			debugContent += "\t\t" + cookie + "\n"
 			debugContent += "\t\t" + val + "\n"
-			self.cookie[cookie] = val
-
-		self.sendCookie()
 
 		for header, val in Core.HEADERS():
 			self.send_header(header, val)
