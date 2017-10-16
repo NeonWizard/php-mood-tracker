@@ -1,11 +1,40 @@
-<form action="/login" method="post" enctype="application/json">
-	<div style="display: flex">
-		<label>Username: </label>
-		<input name="username" type="text"></input>
-	</div>
-	<div style="display: flex">
-		<label>Password: </label>
-		<input name="password" type="text"></input>
-	</div>
+<style>
+	#login-form {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+
+		padding: 40px 60px;
+
+		font-size: 1.8em;
+		background-color: rgba(50, 50, 50, 0.4);
+		border-radius: 25px;
+		border: 1px solid black;
+	}
+
+	#login-form input {
+		margin: 10px;
+		padding: 10px 13px;
+		font-size: inherit;
+
+		border: 1px solid black;
+	}
+
+	#login-form input[type="submit"] {
+		padding: 10px 5px;
+
+		cursor: pointer;
+	}
+</style>
+
+<form id="login-form" action="/login" method="post" enctype="application/json">
+	<input type="text" placeholder="Username" name="username" type="text"></input>
+	<input type="password" placeholder="Password" name="password" type="text"></input>
+	<br/>
 	<input type="submit">
 </form>
