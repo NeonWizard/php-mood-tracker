@@ -61,6 +61,12 @@ class Auth:
 			return False
 
 		# Check if session is expired, if so delete from DB and return False
+		now = datetime.datetime.now()
+		expiry = datetime.datetime.strptime(sessiondata['expiry'], "%Y-%m-%d %H:%M:%S.%f")
+		if now > expiry:
+			userSessionTable = Table('UserSession')
+			userSessionTable.delete(sessiondata['id'])
+			return False
 
 		userdata = Core.MODEL('USER').getById(sessiondata['userId'])
 		self.authSuccess(userdata)
@@ -81,9 +87,6 @@ class Auth:
 			'token': token,
 			'expiry': str(expiry)
 		})
-
-	def deleteSession(self):
-		pass
 
 
 Auth = Auth()
