@@ -1,1 +1,70 @@
-<h1>Main page</h1>
+<div style="padding-left: 30px">
+	<h1>Hello world!</h1>
+
+	<br/>
+	<hr/>
+
+	<h3>Controller variable testing</h3>
+	<hr/>
+	<br/>
+
+	<p>${var}</p>
+
+	<br/>
+	<hr/>
+
+	<h3>Inline for-loop testing</h3>
+	<hr/>
+	<br/>
+
+	<ul>
+	% for i in range(5):
+		% if (i%2) == 0:
+			<li>${i} - EVEN</li>
+		% else:
+			<li>${i}
+		% endif
+	% endfor
+	</ul>
+
+	<br/>
+	<hr/>
+
+	<h3>Includes testing</h3>
+	<hr/>
+	<br/>
+
+	<%include file="user-table.inc.html" />
+
+	<br/>
+	<hr/>
+
+	<h3>Core variables testing</h3>
+	<hr/>
+	<br/>
+
+	<div style="display: flex; width: 100%">
+		<b>PATH: </b>&nbsp;&nbsp;
+		<p>${PATH}</p>
+	</div>
+	<div style="display: flex; width: 100%">
+		<b>PARAMS: </b>&nbsp;&nbsp;
+		<p>${PARAMS}</p>
+	</div>
+	<div style="display: flex; width: 100%">
+		<b>CONFIG.siteTitle: </b>&nbsp;&nbsp;
+		<p>${CONFIG.siteTitle}</p>
+	</div>
+
+	<br/>
+	<hr/>
+
+	<h3>Authentication</h3>
+	<hr/>
+	<br/>
+
+	<div style="display: flex; width: 100%">
+		<b>USER: </b>&nbsp;&nbsp;
+		<p>${USER['username']}</p>
+	</div>
+</div>
