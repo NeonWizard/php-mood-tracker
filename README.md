@@ -9,8 +9,8 @@ This application allows you to track your daily mood conveniently, and displays 
  - [x] Serve css/js
  - [x] Add database drop->create tables and seed helper scripts
  - [x] Instead of exec()ing every controller file, only exec the one that is needed
- - [ ] Add jquery
- - [ ] Add method="POST" to all forms
+ - [x] Add jquery
+ - [x] Add method="POST" to all forms
  - [ ] Cleanup and standardize core/core
  - [ ] Allow sending in a dictionary to Table.select for query vars (instead of string formatting before function call)
  - [ ] Load cookies into Core instead of reading from self.cookie
