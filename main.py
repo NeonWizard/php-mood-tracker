@@ -71,6 +71,8 @@ class Handler(BaseHTTPRequestHandler):
 	def loadCookie(self):
 		if "Cookie" in self.headers:
 			self.cookie = cookies.SimpleCookie(self.headers["Cookie"])
+			for key in self.cookie:
+				Core.COOKIELOAD(key, self.cookie[key].value)
 		else:
 			self.cookie = cookies.SimpleCookie()
 
@@ -91,7 +93,7 @@ class Handler(BaseHTTPRequestHandler):
 		Core.HEADERSET("Access-Control-Allow-Methods", "GET, POST, PUT")
 		Core.HEADERSET("Access-Control-Allow-Credentials", "true")
 
-		for cookie, val in Core.COOKIES():
+		for cookie, val in Core.COOKIES_TO_SEND():
 			self.cookie[cookie] = val # abuse this to get morsel string
 			self.send_header("Set-Cookie", self.cookie[cookie].OutputString())
 			debugContent += "\tCookie: " + "\n"
@@ -119,6 +121,7 @@ class Handler(BaseHTTPRequestHandler):
 		self.send_response()
 
 	def do_GET(self):
+		Core.__init__() 	# Reset core
 		self.loadCookie()	# Always load the cookie regardless of whether it's used or not
 
 		if self.path == "/":
@@ -126,9 +129,7 @@ class Handler(BaseHTTPRequestHandler):
 		if self.path[:6] == "/login":
 			self.path = "/login"
 
-
 		params = self.path.strip("/").split("/")
-		Core.__init__() # reset core
 
 
 		# --- SERVE CSS/JS ---
@@ -153,13 +154,13 @@ class Handler(BaseHTTPRequestHandler):
 
 		# --- AUTHENTICATION LOGIC ---
 		if self.path != "/login":
-			if 'session' not in self.cookie:
+			if not Core.COOKIES('session'):
 				# Redirect to login
 				Core.redirect("/login")
 				self.send_response()
 				return
 			else:
-				if not Auth.validateSession(self.cookie['session'].value):
+				if not Auth.validateSession(Core.COOKIES('session')):
 					# Invalid or nonexistent session, redirect to login
 					Core.redirect("/login")
 					self.send_response()

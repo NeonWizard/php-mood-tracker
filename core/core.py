@@ -10,6 +10,7 @@ class Core:
 		self._session = {}
 		self._headers = {}
 		self._cookies = {}
+		self._sendCookies = {}
 
 		self._responseCode = 200
 		self._persistResponse = False
@@ -63,15 +64,21 @@ class Core:
 	def CONFIG(self):
 		return config
 
-	def COOKIESET(self, key, val):
+	def COOKIELOAD(self, key, val): 	# load it for reading, but don't send back
 		self._cookies[key] = val
-	def COOKIES(self, key=None):
+	def COOKIESET(self, key, val):		# Set for reading and sending back to client
+		self._cookies[key] = val
+		self._sendCookies[key] = val
+	def COOKIES(self, key=None):		# Look up cookie(s)
 		if not key:
 			return self._cookies.items()
 
+		# key = key.lower()
 		if key in self._cookies:
 			return self._cookies[key]
 		return None
+	def COOKIES_TO_SEND(self):			# List all cookies to send back to client
+		return self._sendCookies.items()
 
 	def SESSET(self, key, val):
 		self._session[key] = val
