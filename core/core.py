@@ -19,7 +19,7 @@ class Core:
 		self._MODELS = {}
 		for root, dirs, fileNames in os.walk("models"):
 			for fileName in fileNames:
-				exec(open(root+"\\"+fileName).read())
+				exec(open(root+"/"+fileName).read())
 				modelName = fileName.rstrip(".py")
 				self._MODELS[modelName.upper()] = locals()[modelName[0].upper() + modelName[1:] + "Model"]()
 
